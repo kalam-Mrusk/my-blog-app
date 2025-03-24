@@ -10,7 +10,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://localhost:4173"],
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:4173",
+      "https://my-blog-app-1.onrender.com",
+    ],
     credentials: true,
   })
 );
