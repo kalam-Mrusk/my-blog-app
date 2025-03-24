@@ -218,7 +218,6 @@ const CreateBlogPage = () => {
     formData.append("content", description);
     formData.append("tags", selectedTags);
     formData.append("image", image);
-    console.log(formData);
     if (!title || !description || !image || !selectedTags)
       return toast("all field required");
     try {

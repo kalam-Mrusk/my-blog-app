@@ -5,12 +5,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditableBlogCard from "../component/EditableBlogCard.jsx";
 // import { allBlogs } from "../constants/blog-data.constant.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import SaveIcon from "@mui/icons-material/Save";
 import baseUrl from "../utils/baseUrl.js";
+import { refresh } from "../redux/loading.slice.js";
 // Styled Components
 const Container = styled.div`
   max-width: 900px;
@@ -139,6 +140,7 @@ const BlogList = styled.div`
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [avatar, setAvatar] = useState(null);
   const [fullname, setFullname] = useState("John Doe");
   const [username, setUsername] = useState("johndoe123");
@@ -189,11 +191,11 @@ const ProfilePage = () => {
 
       // setloading(false);
       setFile(null);
-      setuploadBox(false);
+      // setuploadBox(false);
       toast("avatar updated.");
       dispatch(refresh());
     } catch (error) {
-      console.error("Error sending message", error);
+      console.log("Error sending message", error);
       // setloading(false);
     }
   };
