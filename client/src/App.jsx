@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setBlogs, setError } from "./redux/blog.slice.js";
 import Loader from "./loader/Loader.jsx";
+import baseUrl from "./utils/baseUrl.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function App() {
   const getCurrentUser = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8080/api/blog-app/user/get-current-user",
+        `${baseUrl}/user/get-current-user`,
 
         {
           withCredentials: true,
@@ -38,9 +39,7 @@ function App() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/blog-app/blog/all`
-      );
+      const response = await axios.get(`${baseUrl}/blog/all`);
       dispatch(setBlogs(response.data.data));
     } catch (error) {
       console.log(error);
