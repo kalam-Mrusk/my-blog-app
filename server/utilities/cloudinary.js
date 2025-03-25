@@ -8,17 +8,42 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-const uploadOnCloudinary = async (localFilePath) => {
+// const uploadOnCloudinary = async (localFilePath) => {
+//   try {
+//     if (!localFilePath) return null;
+//     const res = await cloudinary.uploader.upload(localFilePath, {
+//       resource_type: "image",
+//     });
+//     console.log("image is uploaded on cloudinary", res.url);
+//     fs.unlinkSync(localFilePath);
+//     return res;
+//   } catch (error) {
+//     fs.unlinkSync(localFilePath);
+//     return null;
+//   }
+// };
+
+export const uploadOnCloudinary = async (fileBuffer) => {
   try {
-    if (!localFilePath) return null;
-    const res = await cloudinary.uploader.upload(localFilePath, {
-      resource_type: "image",
+    if (!fileBuffer) return null;
+
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        { resource_type: "image" },
+        (error, result) => {
+          if (error) {
+            console.error("Cloudinary Upload Error:", error);
+            reject(error);
+          } else {
+            resolve(result);
+          }
+        }
+      );
+
+      uploadStream.end(fileBuffer); // Send the buffer to Cloudinary
     });
-    console.log("image is uploaded on cloudinary", res.url);
-    fs.unlinkSync(localFilePath);
-    return res;
   } catch (error) {
-    fs.unlinkSync(localFilePath);
+    console.error("Cloudinary Upload Error:", error);
     return null;
   }
 };

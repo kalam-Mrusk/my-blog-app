@@ -127,7 +127,7 @@ const updateAvatar = asyncHandler(async (req, res) => {
   if (req.file) {
     const user = await User.findById(userId);
     if (user.avatar) await deleteFileFromCloudinary(user.avatar);
-    const uploadResult = await uploadOnCloudinary(req.file.path);
+    const uploadResult = await uploadOnCloudinary(req.file.buffer);
     if (!uploadResult) throw new Error("File upload failed");
     fileUrl = uploadResult.secure_url;
   }

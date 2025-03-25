@@ -186,7 +186,7 @@ const ProfilePage = () => {
     try {
       const res = await axios.post(`${baseUrl}/user/update/avatar`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
+        // withCredentials: true,
       });
 
       // setloading(false);
