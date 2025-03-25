@@ -23,7 +23,7 @@ cloudinary.config({
 //   }
 // };
 
-export const uploadOnCloudinary = async (fileBuffer) => {
+const uploadOnCloudinary = async (fileBuffer) => {
   try {
     if (!fileBuffer) return null;
 
