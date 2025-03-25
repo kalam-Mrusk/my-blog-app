@@ -143,7 +143,7 @@ const BlogUpdatePage = () => {
           required
         />
         <TextArea
-          name="description"
+          name="content"
           placeholder="Description"
           value={blog.content}
           onChange={handleChange}
