@@ -80,7 +80,7 @@ const BlogUpdatePage = () => {
   useEffect(() => {
     // Fetch existing blog data
     const fetchSingleBlog = async () => {
-      console.log(blogId);
+      // console.log(blogId);
       if (!blogId) return;
       try {
         const res = await axios.get(`${baseUrl}/blog/${blogId}`);
@@ -110,7 +110,7 @@ const BlogUpdatePage = () => {
       formData.append("title", blog.title);
       formData.append("content", blog.content);
       formData.append("tags", blog.tags);
-      console.log(blog.tags);
+      // console.log(blog.tags);
       if (blog.image) {
         formData.append("image", blog.image);
       }
