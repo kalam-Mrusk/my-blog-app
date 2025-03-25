@@ -12,7 +12,6 @@
 
 // export const upload = multer({ storage: storage });
 
-import multer from "multer";
 // import fs from "fs";
 
 // // Ensure the folder exists before saving files
@@ -32,6 +31,7 @@ import multer from "multer";
 // });
 
 // export const upload = multer({ storage: storage });
+import multer from "multer";
 
 const storage = multer.memoryStorage(); // Store in memory, not disk
 export const upload = multer({ storage: storage });

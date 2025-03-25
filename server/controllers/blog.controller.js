@@ -18,7 +18,7 @@ const createBlog = asyncHandler(async (req, res) => {
 
   let imageUrl = null;
   if (req.file) {
-    const uploadedImage = await uploadOnCloudinary(req.file.path);
+    const uploadedImage = await uploadOnCloudinary(req.file.buffer);
     if (!uploadedImage) throw new ApiError(500, "Image upload failed.");
     imageUrl = uploadedImage.secure_url;
   }
@@ -49,7 +49,7 @@ const updateBlog = asyncHandler(async (req, res) => {
   let newImageUrl = blog.image;
   if (req.file) {
     if (blog.image) await deleteFileFromCloudinary(blog.image);
-    const uploadedImage = await uploadOnCloudinary(req.file.path);
+    const uploadedImage = await uploadOnCloudinary(req.file.buffer);
     if (!uploadedImage) throw new ApiError(500, "Image upload failed.");
     newImageUrl = uploadedImage.secure_url;
   }
