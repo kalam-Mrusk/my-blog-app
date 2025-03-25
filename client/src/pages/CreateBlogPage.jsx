@@ -162,6 +162,7 @@ const CreateBlogPage = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [showTags, setShowTags] = useState(false);
   const [image, setImage] = useState(null);
+  const [imagePre, setImagePre] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const navigate = useNavigate();
@@ -229,7 +230,8 @@ const CreateBlogPage = () => {
       setDescription("");
       setSelectedTags("");
       setTitle("");
-      setImage("");
+      setImage(null);
+      setImagePre(null);
       // setInputMessage("");
       // setFile(null);
     } catch (error) {
@@ -238,7 +240,7 @@ const CreateBlogPage = () => {
       setloading(false);
     }
   };
-
+  console.log(image);
   return (
     <Container>
       <Title>Create a New Blog</Title>
@@ -283,14 +285,17 @@ const CreateBlogPage = () => {
             type="file"
             accept="image/*"
             hidden
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+              setImagePre(URL.createObjectURL(e.target.files[0]));
+            }}
           />
           <AddPhotoAlternateIcon />
           Upload Image
         </ImageUpload>
 
         {/* Show Image Preview */}
-        {image && <PreviewImage src={image} alt="Preview" />}
+        {image && <PreviewImage src={imagePre} alt="Preview" />}
         {loading ? (
           <SubmitButton>
             <ClipLoader size={15} />
